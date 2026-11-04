@@ -29,6 +29,10 @@
 // Import the Button UI component from "./ui/Button"
 
 /* --- YOUR IMPORTS GO HERE --- */
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import logo from "../assets/Beans_logo.png";
+import Button from "./ui/Button";
 
 // STEP 2: Create and export the NavBar component
 // export default function NavBar() { ... }
@@ -81,3 +85,45 @@
 //   Inside: nav links + Button, each calling closeMenu onClick
 
 /* --- YOUR COMPONENT CODE GOES HERE --- */
+
+export default function NavBar({ toggleCart, theme, onToggleTheme }) {
+    const [menuOpen, setMenuOpen] = useState(false);
+    // container = menuOpen, function to update the container = setMenuOpen, current value = false
+    const [scrolled, setScrolled] = useState(false);
+    // container = scrolled, function to update the container = setScrolled, current value = false
+    const closeMenu = () => setMenuOpen(false);
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+
+    }, []); 
+    // [] means this effect runs once on mount and cleans up on unmount
+
+    return (
+        // motion.header is a root element which is a third party component from framer-motion
+        <motion.header
+            className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}
+            initial={{ y: -80, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
+            <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 md:px-8">
+                {/* Brand */}
+                <a href="#home" className="brand">
+                    <img 
+                        src={logo}
+                        alt="Beans Place Logo"
+                        className="logo h-12 w-auto md:h-14"
+                    />
+                </a>
+
+                {/* Desktop Nav */}
+                <nav className="nav-links hidden items-center gap-10 md:flex">
+                    <a href="" />
+                </nav>
+            </div>
+        </motion.header>
+    )
+} 

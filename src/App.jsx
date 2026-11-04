@@ -55,3 +55,52 @@
 /* --- YOUR COMPONENT CODE GOES HERE --- */
 
 // imports go below here
+
+export default function App() {
+    return(
+        <div className="app">
+            {/* SHOPPING CART */}
+
+            {/* NAVBAR */}
+
+            {/* HERO */}
+        <section className="hero bg-hero">
+            <div className="hero-grid">
+
+            </div>
+        </section>
+
+        {/* RIBBON TICKER */}
+
+        {/* FEATURES / CAROUSEL */}
+        <section className="features bg-features" id="shop">
+
+        </section>
+
+        {/* PRODUCT SHOWCASE */}
+        <section className="bg-cta">
+
+        </section>
+
+        {/* CTA */}
+        <section className="bg-cta">
+
+        </section>
+
+        {/* ABOUT */}
+        <section className="bg-cta" id="about">
+
+        </section>
+
+        {/* CONTACT */}
+        <section className="bg-cta" id="contact">
+
+        </section>
+
+        {/* FOOTER */}
+        <section className="bg-footer">
+
+        </section>
+        </div>
+    );
+}
