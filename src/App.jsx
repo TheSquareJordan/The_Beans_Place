@@ -29,7 +29,9 @@
 // - ContactSection
 
 /* --- YOUR IMPORTS GO HERE --- */
+import {useMemo, useState, useEffect} from "react";
 
+import NavBar from "./components/NavBar";
 // STEP 2: Create and export the App component
 // Use: export default function App() { ... }
 //
@@ -57,11 +59,71 @@
 // imports go below here
 
 export default function App() {
+    const [cartOpen, setCartOpen] = useState(false);
+    const [cartItems, setCartItems] = useState([]);
+    const [theme, setTheme] = useState(() => {
+        if (typeof window === "undefined") return "light";
+        const savedTheme = window.localStorage.getItem("theme");
+        if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+    });
+
+    useEffect(() => {
+        document.documentElement.classList.toggle("dark", theme === "dark");
+        window.localStorage.setItem("theme", theme);
+    }, [theme]); 
+
+    const toggleCart = () => setCartOpen((open) => !open);
+
+    const addToCart = (product) => {
+        setCartItems((current) => {
+            const existing = current.find((item) => item.id === product.id); 
+            if (existing) {
+                return current.map((item) => 
+                item.id === product.id ? { ...item, qty: item.qty + 1 } : item
+                );
+            }
+
+            return [...current, { ...product, qty: 1 }];
+        });
+    };
+
+    const updateCartQty = (id, delta) => {
+        setCartItems((current) =>
+            current
+            .map((item) => 
+            item.id === id
+            ? { ...item, qty: Math.max(0, item.qty + delta)}
+            : item,
+        )
+        .filter((item) => item.qty > 0),
+        );
+    };
+
+    const removeFromCart = (id) => {
+        setCartItems((current) => current.filter((item) => item.id !== id));
+    };
+
+    const cartCount = useMemo(
+        () => cartItems.reduce((sum, item) => sum + item.qty, 0),
+        [cartItems],
+    );
+
     return(
         <div className="app">
             {/* SHOPPING CART */}
 
             {/* NAVBAR */}
+            <NavBar 
+                toggleCart={toggleCart}
+                cartCount={cartCount}
+                theme={theme}
+                onToggleTheme={() =>
+                    setTheme((current) => (current === "light" ? "dark" : "light"))
+                }
+            />
 
             {/* HERO */}
         <section className="hero bg-hero">
