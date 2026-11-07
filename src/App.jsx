@@ -29,11 +29,12 @@
 // - ContactSection
 
 /* --- YOUR IMPORTS GO HERE --- */
-import {useMemo, useState, useEffect} from "react";
+import { useMemo, useState, useEffect } from "react";
 
 import NavBar from "./components/NavBar";
 import HeroSection from "./components/HeroSection";
 import RibbonTicker from "./components/RibbonTicker";
+import FeaturesSection from "./components/FeaturesSection";
 // STEP 2: Create and export the App component
 // Use: export default function App() { ... }
 //
@@ -61,111 +62,101 @@ import RibbonTicker from "./components/RibbonTicker";
 // imports go below here
 
 export default function App() {
-    const [cartOpen, setCartOpen] = useState(false);
-    const [cartItems, setCartItems] = useState([]);
-    const [theme, setTheme] = useState(() => {
-        if (typeof window === "undefined") return "light";
-        const savedTheme = window.localStorage.getItem("theme");
-        if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
-        return window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
+  const [cartOpen, setCartOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === "undefined") return "light";
+    const savedTheme = window.localStorage.getItem("theme");
+    if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  });
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    window.localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleCart = () => setCartOpen((open) => !open);
+
+  const addToCart = (product) => {
+    setCartItems((current) => {
+      const existing = current.find((item) => item.id === product.id);
+      if (existing) {
+        return current.map((item) =>
+          item.id === product.id ? { ...item, qty: item.qty + 1 } : item,
+        );
+      }
+
+      return [...current, { ...product, qty: 1 }];
     });
+  };
 
-    useEffect(() => {
-        document.documentElement.classList.toggle("dark", theme === "dark");
-        window.localStorage.setItem("theme", theme);
-    }, [theme]); 
-
-    const toggleCart = () => setCartOpen((open) => !open);
-
-    const addToCart = (product) => {
-        setCartItems((current) => {
-            const existing = current.find((item) => item.id === product.id); 
-            if (existing) {
-                return current.map((item) => 
-                item.id === product.id ? { ...item, qty: item.qty + 1 } : item
-                );
-            }
-
-            return [...current, { ...product, qty: 1 }];
-        });
-    };
-
-    const updateCartQty = (id, delta) => {
-        setCartItems((current) =>
-            current
-            .map((item) => 
-            item.id === id
-            ? { ...item, qty: Math.max(0, item.qty + delta)}
+  const updateCartQty = (id, delta) => {
+    setCartItems((current) =>
+      current
+        .map((item) =>
+          item.id === id
+            ? { ...item, qty: Math.max(0, item.qty + delta) }
             : item,
         )
         .filter((item) => item.qty > 0),
-        );
-    };
-
-    const removeFromCart = (id) => {
-        setCartItems((current) => current.filter((item) => item.id !== id));
-    };
-
-    const cartCount = useMemo(
-        () => cartItems.reduce((sum, item) => sum + item.qty, 0),
-        [cartItems],
     );
+  };
 
-    return(
-        <div className="app">
-            {/* SHOPPING CART */}
+  const removeFromCart = (id) => {
+    setCartItems((current) => current.filter((item) => item.id !== id));
+  };
 
-            {/* NAVBAR */}
-            <NavBar 
-                toggleCart={toggleCart}
-                cartCount={cartCount}
-                theme={theme}
-                onToggleTheme={() =>
-                    setTheme((current) => (current === "light" ? "dark" : "light"))
-                }
-            />
+  const cartCount = useMemo(
+    () => cartItems.reduce((sum, item) => sum + item.qty, 0),
+    [cartItems],
+  );
 
-            {/* HERO */}
-        <section className="hero bg-hero">
-            <div className="hero-grid">
-                <HeroSection />
-            </div>
-        </section>
+  return (
+    <div className="app">
+      {/* SHOPPING CART */}
 
-        {/* RIBBON TICKER */}
-                <RibbonTicker />
-                
-        {/* FEATURES / CAROUSEL */}
-        <section className="features bg-features" id="shop">
+      {/* NAVBAR */}
+      <NavBar
+        toggleCart={toggleCart}
+        cartCount={cartCount}
+        theme={theme}
+        onToggleTheme={() =>
+          setTheme((current) => (current === "light" ? "dark" : "light"))
+        }
+      />
 
-        </section>
-
-        {/* PRODUCT SHOWCASE */}
-        <section className="bg-cta">
-
-        </section>
-
-        {/* CTA */}
-        <section className="bg-cta">
-
-        </section>
-
-        {/* ABOUT */}
-        <section className="bg-cta" id="about">
-
-        </section>
-
-        {/* CONTACT */}
-        <section className="bg-cta" id="contact">
-
-        </section>
-
-        {/* FOOTER */}
-        <section className="bg-footer">
-
-        </section>
+      {/* HERO */}
+      <section className="hero bg-hero">
+        <div className="hero-grid">
+          <HeroSection />
         </div>
-    );
+      </section>
+
+      {/* RIBBON TICKER */}
+      <RibbonTicker />
+
+      {/* FEATURES / CAROUSEL */}
+      <section className="features bg-features" id="shop">
+        <FeaturesSection />
+      </section>
+
+      {/* PRODUCT SHOWCASE */}
+      <section className="bg-cta"></section>
+
+      {/* CTA */}
+      <section className="bg-cta"></section>
+
+      {/* ABOUT */}
+      <section className="bg-cta" id="about"></section>
+
+      {/* CONTACT */}
+      <section className="bg-cta" id="contact"></section>
+
+      {/* FOOTER */}
+      <section className="bg-footer"></section>
+    </div>
+  );
 }
