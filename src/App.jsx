@@ -35,6 +35,14 @@ import NavBar from "./components/NavBar";
 import HeroSection from "./components/HeroSection";
 import RibbonTicker from "./components/RibbonTicker";
 import FeaturesSection from "./components/FeaturesSection";
+import ProductShowcase from "./components/ProductShowcase";
+
+import imgEthiopianHarrar from "./assets/Ethiopian-Harrar-Bag.png";
+import imgColombianSupremo from "./assets/Colombian-Supremo-Bag.png";
+import imgKenyaAA from "./assets/Kenya-AA-Bag.png";
+import imgPanamaGeisha from "./assets/Panama-Geisha.png";
+import imgKona from "./assets/Kona-Bag.png";
+import imgGuatemalaAntigua from "./assets/Guatemala-Antigua-Bag.png";
 // STEP 2: Create and export the App component
 // Use: export default function App() { ... }
 //
@@ -60,6 +68,69 @@ import FeaturesSection from "./components/FeaturesSection";
 /* --- YOUR COMPONENT CODE GOES HERE --- */
 
 // imports go below here
+const productCatalog = [
+  {
+    id: 1,
+    name: "Ethiopian Harrar",
+    origin: "Ethiopia",
+    price: 18.99,
+    roast: "Medium",
+    notes: "Blueberry, dark chocolate, wine",
+    image: imgEthiopianHarrar,
+    badge: "Best Seller",
+  },
+  {
+    id: 2,
+    name: "Colombian Supremo",
+    origin: "Colombia",
+    price: 16.99,
+    roast: "Medium Dark",
+    notes: "Caramel, nutty smooth finish",
+    image: imgColombianSupremo,
+    badge: null,
+  },
+  {
+      id: 3,
+      name: "Kenya AA",
+      origin: "Kenya",
+      price: 21.99,
+      roast: "Light",
+      notes: "Bright citrus, black currant, floral",
+      image: imgKenyaAA,
+      badge: "Staff Pick",
+    },
+    {
+      id: 4,
+      name: "Panama Geisha",
+      origin: "Panama",
+      price: 34.99,
+      roast: "Light",
+      notes: "Jasmine, bergamot, tropical fruit",
+      image: imgPanamaGeisha,
+      badge: "Limited"
+    },
+    {
+      id: 5,
+      name: "Kona",
+      origin: "Hawaii",
+      price: 29.99,
+      roast: "Medium",
+      notes: "Brown sugar, macadamia, mild acidity",
+      image: imgKona,
+      badge: null
+    },
+    {
+      id: 6,
+      name: "Guatemala Antigua",
+      origin: "Guatemala",
+      price: 17.99,
+      roast: "Dark",
+      notes: "Cocoa, spice, smoky sweetness",
+      image: imgGuatemalaAntigua,
+      badge: "New"
+    }
+];
+
 
 export default function App() {
   const [cartOpen, setCartOpen] = useState(false);
@@ -145,7 +216,7 @@ export default function App() {
 
       {/* PRODUCT SHOWCASE */}
       <section className="bg-cta"></section>
-
+      <ProductShowcase products={productCatalog} addToCart={addToCart} />
       {/* CTA */}
       <section className="bg-cta"></section>
 
