@@ -25,61 +25,167 @@
 //   ScrollReveal (+ StaggerContainer, StaggerItem),
 //   AnimatedCounter
 
-/* --- YOUR IMPORTS GO HERE --- */
+import Button from "./ui/Button";
+import Badge from "./ui/Badge";
+import ScrollReveal, { StaggerContainer, StaggerItem } from "./ui/ScrollReveal";
+import AnimatedCounter from "./ui/AnimatedCounter";
+import appStoreLogo from "../assets/apple-logo-svgrepo-com (1).svg";
+import playStoreLogo from "../assets/google-play-svgrepo-com.svg";
 
+const perks = [
+  { icon: "🌱", label: "Ethically Sourced" },
+  { icon: "🔥", label: "Freshly Roasted" },
+  { icon: "🚚", label: "Free Shipping $50+" },
+  { icon: "♻️", label: "Eco-Friendly Bags" },
+];
 
-// STEP 2: Define the perks array (outside the component)
-// const perks = [
-//   { icon: "leaf emoji", label: "Ethically Sourced" },
-//   { icon: "fire emoji", label: "Freshly Roasted" },
-//   { icon: "truck emoji", label: "Free Shipping $50+" },
-//   { icon: "recycle emoji", label: "Eco-Friendly Bags" }
-// ];
+export default function CtaSection() {
+  return (
+    <div className="cta-section">
+      <ScrollReveal animation="fadeUp" delay={0}>
+        <Badge variant="accent" className="mb06">
+          Fresh Roasts Daily
+        </Badge>
+      </ScrollReveal>
 
-/* --- YOUR PERKS DATA GOES HERE --- */
+      <ScrollReveal animation="fadeUp" delay={0.1}>
+        <h2>
+          Brewed With Passion,
+          <br />
+          Delivered Fresh
+        </h2>
+      </ScrollReveal>
 
-// STEP 3: Create and export CtaSection
-// export default function CtaSection() { ... }
-//
-// JSX Structure:
-//   <div className="cta-section">
-//
-//     Header:
-//       - Badge: "Fresh Roasts Daily"
-//       - <h2>: "Brewed With Passion," / "Delivered Fresh"
-//       - Separator
-//       - Subtitle paragraph
-//
-//     Perks grid:
-//       <StaggerContainer className="cta-perks">
-//         {perks.map((perk) => (
-//           <StaggerItem key={perk.label} className="cta-perk-item">
-//             <span className="cta-perk-icon">{perk.icon}</span>
-//             <span className="cta-perk-label">{perk.label}</span>
-//           </StaggerItem>
-//         ))}
-//       </StaggerContainer>
-//
-//     Buttons:
-//       - "Order Now" (accent) + "View Full Menu" (ghost)
-//
-//     Stats bar (3 animated counters):
-//       <div className="cta-stats">
-//         <div className="cta-stat">
-//           <AnimatedCounter target={15} suffix="+" />
-//           <span>Origins</span>
-//         </div>
-//         (divider)
-//         <div className="cta-stat">
-//           <AnimatedCounter target={2400} suffix="+" />
-//           <span>Happy Customers</span>
-//         </div>
-//         (divider)
-//         <div className="cta-stat">
-//           <AnimatedCounter target={48} suffix="hr" />
-//           <span>Fresh Delivery</span>
-//         </div>
-//       </div>
-//   </div>
+      <ScrollReveal animation="fadeUp" delay={0.2}>
+        <p className="cta-subtitle">
+          Skip the line, order premium single-origin coffee online and get it
+          roasted to order. From our roastery to your doorstep in 1-2 business
+          days.
+        </p>
+      </ScrollReveal>
 
-/* --- YOUR COMPONENT CODE GOES HERE --- */
+      <StaggerContainer staggerDelay={0.1} className="cta-perks">
+        {perks.map((perk) => (
+          <StaggerItem
+            key={perk.label}
+            animation="scaleUp"
+            className="cta-perk-item"
+          >
+            <span className="cta-perk-icon">{perk.icon}</span>
+            <span className="cta-perk-label">{perk.label}</span>
+          </StaggerItem>
+        ))}
+      </StaggerContainer>
+
+      <ScrollReveal animation="fadeUp" delay={0.15}>
+        <div className="cta-buttons">
+          <Button variant="accent" size="lg">
+            Order Now
+          </Button>
+          <Button variant="ghost" size="lg">
+            View Full Menu
+          </Button>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal animation="fadeUp" delay={0.22}>
+        <div className="cta-download">
+          <span className="cta-download-label">
+            Download The Beans Place App
+          </span>
+          <div className="cta-download-steps">
+            <div className="cta-download-step">
+              <span className="cta-download-step-index">1</span>
+              <div className="cta-download-step-copy">
+                <strong>Open the app page</strong>
+                <p>
+                  Tap the download button or visit the app link from your
+                  device.
+                </p>
+              </div>
+            </div>
+
+            <div className="cta-download-step">
+              <span className="cta-download-step-index">2</span>
+              <div className="cta-download-step-copy">
+                <strong>Choose your platform</strong>
+                <p>Select iOS or Android and start the install process.</p>
+              </div>
+            </div>
+
+            <div className="cta-download-step">
+              <span className="cta-download-step-index">3</span>
+              <div className="cta-download-step-copy">
+                <strong>Launch and order</strong>
+                <p>
+                  Open the app, browse our roasts, and place your first order.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal animation="fadeUp" delay={0.24}>
+        <div className="cta-store-badges">
+          <a href="#" className="cta-store-badge app-store-badge">
+            <span className="badge-icon">
+              <img
+                src={appStoreLogo}
+                alt="Apple App Store"
+                className="w-5 h-5"
+              />
+            </span>
+            <span>
+              <small>Download on the</small>
+              <strong>App Store</strong>
+            </span>
+          </a>
+
+          <a href="#" className="cta-store-badge play-store-badge">
+            <span className="badge-icon">
+              <img
+                src={playStoreLogo}
+                alt="Google Play Store"
+                className="w-5 h-5"
+              />
+            </span>
+            <span>
+              <small>Get it on</small>
+              <strong>Google Play</strong>
+            </span>
+          </a>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal animation="fadeUp" delay={0.2}>
+        <div className="cta-stats">
+          <div className="cta-stat">
+            <span className="cta-stat-number">
+              <AnimatedCounter target={15} suffix="+" />
+            </span>
+            <span className="cta-stat-label">Origins</span>
+          </div>
+
+          <div className="cta-stat-divider" />
+
+          <div className="cta-stat">
+            <span className="cta-stat-number">
+              <AnimatedCounter target={2400} suffix="+" />
+            </span>
+            <span className="cta-stat-label">Happy Customers</span>
+          </div>
+
+          <div className="cta-stat-divider" />
+
+          <div className="cta-stat">
+            <span className="cta-stat-number">
+              <AnimatedCounter target={48} suffix="hr" />
+            </span>
+            <span className="cta-stat-label">Fresh Delivery</span>
+          </div>
+        </div>
+      </ScrollReveal>
+    </div>
+  );
+}
