@@ -24,16 +24,24 @@
     --taupe: #8f867b;
     --espresso: #1a1715;
 
-    --bg-body: var(--cream-light);
+    --bg-body:
+        radial-gradient(ellipse at 12% 18%, #4d5635 0 9%, transparent 9.5%),
+        radial-gradient(ellipse at 31% 42%, #2f3a24 0 13%, transparent 13.5%),
+        radial-gradient(ellipse at 52% 20%, #817b50 0 10%, transparent 10.5%),
+        radial-gradient(ellipse at 72% 55%, #59623a 0 14%, transparent 14.5%),
+        radial-gradient(ellipse at 90% 22%, #363d27 0 11%, transparent 11.5%),
+        radial-gradient(ellipse at 23% 82%, #77704a 0 14%, transparent 14.5%),
+        radial-gradient(ellipse at 64% 86%, #414a2d 0 12%, transparent 12.5%),
+        #a39a70;
     --text: var(--black);
     --link-color: var(--brown-700);
     --link-hover: var(--amber-dark);
     --navbar-bg: rgba(250, 244, 237, 0.72);
     --navbar-scrolled-bg: rgba(250, 244, 237, 0.92);
-    --bg-hero: var(--grad-hero);
-    --bg-features: linear-gradient(180deg, #d4c4b0 0%, var(--brown-700) 100%);
-    --bg-cta: var(--grad-section);
-    --bg-footer: var(--grad-footer);
+    --bg-hero: var(--bg-body);
+    --bg-features: var(--bg-body);
+    --bg-cta: var(--bg-body);
+    --bg-footer: var(--bg-body);
     --store-badge-bg: rgba(255, 255, 255, 0.08);
     --store-badge-hover-bg: rgba(255, 255, 255, 0.12);
     --store-badge-text: #ffffff;
@@ -41,16 +49,24 @@
 }
 
 html.dark {
-    --bg-body: #0f0d0b;
+    --bg-body:
+        radial-gradient(ellipse at 12% 18%, #344126 0 9%, transparent 9.5%),
+        radial-gradient(ellipse at 31% 42%, #1d2618 0 13%, transparent 13.5%),
+        radial-gradient(ellipse at 52% 20%, #605a3b 0 10%, transparent 10.5%),
+        radial-gradient(ellipse at 72% 55%, #3d472d 0 14%, transparent 14.5%),
+        radial-gradient(ellipse at 90% 22%, #252d1d 0 11%, transparent 11.5%),
+        radial-gradient(ellipse at 23% 82%, #514a31 0 14%, transparent 14.5%),
+        radial-gradient(ellipse at 64% 86%, #303820 0 12%, transparent 12.5%),
+        #171a12;
     --text: #f4ede7;
     --link-color: #f5e6d3;
     --link-hover: #f0b955;
     --navbar-bg: rgba(20, 18, 16, 0.82);
     --navbar-scrolled-bg: rgba(20, 18, 16, 0.96);
-    --bg-hero: linear-gradient(175deg, #1c1815 0%, #0f0d0b 40%, #1e1714 100%);
-    --bg-features: linear-gradient(180deg, #1e1714 0%, #0f0d0b 100%);
-    --bg-cta: linear-gradient(180deg, #27211d 0%, #0f0d0b 100%);
-    --bg-footer: linear-gradient(180deg, #0f0d0b 0%, #050302 100%);
+    --bg-hero: var(--bg-body);
+    --bg-features: var(--bg-body);
+    --bg-cta: var(--bg-body);
+    --bg-footer: var(--bg-body);
     --store-badge-bg: rgba(255, 255, 255, 0.1);
     --store-badge-hover-bg: rgba(255, 255, 255, 0.18);
     --store-badge-text: #ffffff;
@@ -103,11 +119,22 @@ body {
     margin: 0;
     color: var(--text);
     background: var(--bg-body);
+    background-size: 260px 260px;
+    background-repeat: repeat;
+    background-attachment: fixed;
     font-family: var(--font-body);
     font-size: 16px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.app {
+    min-height: 100vh;
+    background: var(--bg-body);
+    background-size: 260px 260px;
+    background-repeat: repeat;
+    background-attachment: fixed;
 }
 
 img {
